@@ -14,7 +14,7 @@ export default function Products({ apiUrl }) {
         const response = await fetch(`${config.apiUrl}/get_prodcuts`, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json", // Specify the content type
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             access_token: token,
@@ -26,7 +26,7 @@ export default function Products({ apiUrl }) {
           throw new Error("Failed to fetch products");
         }
         const data = await response.json();
-        setProducts(data.oData.list || []); // Assuming `oData` contains the product list
+        setProducts(data.oData.list || []);
       } catch (error) {
         setError(error.message);
       } finally {
