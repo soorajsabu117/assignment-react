@@ -2,8 +2,9 @@ import React, { useState, useContext } from "react";
 import "../styles.css";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
+import config from "../config";
 
-export default function Signup({ apiUrl }) {
+export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -69,7 +70,7 @@ export default function Signup({ apiUrl }) {
       return;
     }
     try {
-      const response = await fetch(apiUrl + "/sign-up", {
+      const response = await fetch(`${config.apiUrl}/sign-up`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,11 +96,9 @@ export default function Signup({ apiUrl }) {
             setFieldErrors(data.errors);
           } else {
             setErrorMessage(data.message || "Registration failed");
-            setFieldErrors({}); // Clear field errors if none are provided
+            setFieldErrors({});
           }
         }
-
-        // Perform further actions like redirecting or updating app state
       }
     } catch (error) {
       setErrorMessage("An error occurred. Please try again.");

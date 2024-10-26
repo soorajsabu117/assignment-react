@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles.css";
+import config from "../config";
 
 export default function Products({ apiUrl }) {
   const [products, setProducts] = useState([]);
@@ -10,7 +11,7 @@ export default function Products({ apiUrl }) {
     const fetchProducts = async () => {
       try {
         const token = localStorage.getItem("access_token");
-        const response = await fetch(apiUrl + "/get_prodcuts", {
+        const response = await fetch(`${config.apiUrl}/get_prodcuts`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json", // Specify the content type

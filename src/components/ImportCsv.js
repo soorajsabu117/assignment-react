@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import config from "../config";
 
 export default function ImportCsv({ apiUrl }) {
   const [csvFile, setCsvFile] = useState(null);
@@ -28,7 +29,7 @@ export default function ImportCsv({ apiUrl }) {
     formData.append("csv_file", csvFile);
 
     try {
-      const response = await fetch(apiUrl + "/file_upload", {
+      const response = await fetch(`${config.apiUrl}/file_upload`, {
         method: "POST",
         body: formData,
       });

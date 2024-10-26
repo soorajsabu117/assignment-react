@@ -2,8 +2,9 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles.css";
 import { AuthContext } from "./AuthContext";
+import config from "../config";
 
-export default function Login({ apiUrl }) {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,10 +22,10 @@ export default function Login({ apiUrl }) {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent form from submitting the default way
+    e.preventDefault();
 
     try {
-      const response = await fetch(apiUrl + "/login", {
+      const response = await fetch(`${config.apiUrl}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,11 +51,9 @@ export default function Login({ apiUrl }) {
             setFieldErrors(data.errors);
           } else {
             setErrorMessage(data.message || "Login failed");
-            setFieldErrors({}); // Clear field errors if none are provided
+            setFieldErrors({});
           }
         }
-
-        // Perform further actions like redirecting or updating app state
       }
     } catch (error) {
       setErrorMessage("An error occurred. Please try again.");

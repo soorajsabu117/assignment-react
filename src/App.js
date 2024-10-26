@@ -12,23 +12,19 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
 
 function App() {
-  const apiUrl = "http://127.0.0.1:9000/api/v1";
   return (
     <Router>
       <AuthProvider>
         <Header></Header>
         <Routes>
-          <Route path="/" element={<Login apiUrl={apiUrl}></Login>}></Route>
-          <Route
-            path="/sign-up"
-            element={<Signup apiUrl={apiUrl}></Signup>}
-          ></Route>
+          <Route path="/" element={<Login></Login>}></Route>
+          <Route path="/sign-up" element={<Signup></Signup>}></Route>
 
           <Route
             path="/products-list"
             element={
               <ProtectedRoute>
-                <Products apiUrl={apiUrl}></Products>
+                <Products></Products>
               </ProtectedRoute>
             }
           ></Route>
@@ -37,7 +33,7 @@ function App() {
             path="/import-csv"
             element={
               <ProtectedRoute>
-                <ImportCsv apiUrl={apiUrl} />
+                <ImportCsv />
               </ProtectedRoute>
             }
           ></Route>
